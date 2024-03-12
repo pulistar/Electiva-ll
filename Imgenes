@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-  #mysql
   mysql:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
@@ -14,7 +13,7 @@ services:
     image: phpmyadmin
     restart: always
     ports:
-      - 8080:80
+      - "8080:80"  
     environment:
       - PMA_ARBITRARY=1
 
@@ -27,15 +26,14 @@ services:
       POSTGRES_PASSWORD: tu_password
       POSTGRES_DB: tu_database
     
-#si sirve pgadmin
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin-container
     restart: always
     ports:
-      - "3037:80"
+      - "80:80"  
     environment:
-      PGADMIN_DEFAULT_EMAIL: camilopulistar@gmail.co
+      PGADMIN_DEFAULT_EMAIL: camilopulistar@gmail.com
       PGADMIN_DEFAULT_PASSWORD: soy12345
 
   node:
@@ -57,5 +55,6 @@ services:
       - .:/usr/src/app
     ports:
       - "8000:8000"
+
     
   

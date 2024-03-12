@@ -1,0 +1,61 @@
+version: '3'
+
+services:
+  #mysql
+  mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3307:3307"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres-container
+    restart: always
+    environment:
+      POSTGRES_USER: tu_usuario
+      POSTGRES_PASSWORD: tu_password
+      POSTGRES_DB: tu_database
+    
+#si sirve pgadmin
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-container
+    restart: always
+    ports:
+      - "3037:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: camilopulistar@gmail.co
+      PGADMIN_DEFAULT_PASSWORD: soy12345
+
+  node:
+    image: node:latest
+    container_name: node-container
+    restart: always
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8001:8001"
+
+  python:
+    image: python:latest
+    container_name: python-container
+    restart: always
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8000:8000"
+    
+  
